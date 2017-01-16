@@ -15,6 +15,7 @@ class Game {
         self.bank = new Deck();
         self.armory = new Deck();
         self.market = new Deck();
+        self.marketSelection = [];
         self.marketDiscard = new Deck();
         self.starzone = new Deck();
 
@@ -106,10 +107,27 @@ class Game {
 
         self._orderPlayers();
 
-        self.players.forEach(p => {
-            p.hand = self.main.draw(5);
-            p.equipment = self.market.draw(1);
-            p.money = 3;
+        let p = new Promise(function (resolve, reject) {
+            let watchCount = self.players.length;
+
+            self.players.forEach(p => {
+                p.hand = self.main.draw(5);
+                p.equipment = self.market.draw(1);
+                p.money = 3;
+                p.wish(self.starzone)
+                 .then(function () {
+                     watchCount--;
+                     if(watchCount === 0) {
+                         resolve();
+                     }
+                 });
+            });
+        });
+
+        ///TODO: wait for users to discard 2 cards to the starzone
+        p.then(function () {
+            self.marketSelection = self.market.draw(3);
+            self.next();
         });
     }
 
@@ -120,8 +138,6 @@ class Game {
     next () {
         let self = this;
 
-        ///TODO: Evaluate anything important about how previous game state resolved.
-        //See if anyone won
         if(self.players.filter(p => p.empire >= 0b111111111111)) {
             ///TODO: Game is won, stop this and tally unresolved stats.
             self.stop();

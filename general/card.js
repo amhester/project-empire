@@ -11,9 +11,15 @@ class Card {
         self.description = "";
         self.types = 0;
         self.actionCost = 0;
-        self.actions = [
-            /* new Action() */
-        ];
+        self.actions = {
+            and: {
+                or: []
+            },
+            or: [],
+            elemental: {
+
+            }
+        };
     }
 
     hasType (type) {
@@ -39,7 +45,8 @@ class Card {
             DRAW: 0x02000,
             ARMORY: 0x04000,
             BANK: 0x08000,
-            END_TURN: 0x10000
+            END_TURN: 0x10000,
+            RESPONSE: 0x20000
         };
     }
 }

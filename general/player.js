@@ -14,8 +14,22 @@ class Player {
         self.conditions = Player.PLAYER_CONDITIONS.NONE;
     }
 
+    _message (message) {
+
+    }
+
+    _promptHandSelection (num) {
+
+    }
+
+    wish (starzone) {
+        let self = this;
+    }
+
     turn (game) {
         let self = this;
+
+
     }
 
     static get PLAYER_CONDITIONS() {
