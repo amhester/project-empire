@@ -1,5 +1,76 @@
 {
     "cards": [
-        
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        },
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        },
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        },
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        },
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        },
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        },
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        },
+        {
+            "name": "Construct",
+            "Description": "Add either a blue or yellow piece to your empire. If Earth, you may add a red instead.",
+            "types": ["BUILD", "ELEMENTAL", "EARTH"],
+            "actionCost": 0,
+            "actions": [
+                { "type": "BUILD", "targets": ["SELF_EMPIRE"], "value": "function(player) { return player.character.element === 'EARTH' ? [1,2,3] : [1,2] }" }
+            ]
+        }
     ]
 }

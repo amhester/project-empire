@@ -29,7 +29,7 @@ class Card {
             MONEY: 0x00008,
             BUILD: 0x00010,
             CONFRONTATION: 0x00020,
-            ELEMENTAl: 0x00040,
+            ELEMENTAL: 0x00040,
             FIRE: 0x00080,
             WATER: 0x00100,
             EARTH: 0x00200,
