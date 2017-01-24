@@ -26,11 +26,22 @@ class Game {
     }
 
     _orderPlayers () {
-        let self = this;
+        let self = this, m = self.players.length, i, t;
 
-        ///TODO: at this point, should probably just implement shuffle as array extension...
-        ///TODO: IF Chamira is in, then she always goes first, so her spot should be index 0;
-
+        while(m) {
+            i = Math.floor(Math.random() * m--);
+            t = self.players[m];
+            self.players[m] = self.players[i];
+            self.players[i] = t;
+        }
+        for(let j = 0; j < self.players.length; j++) {
+            if(self.players[j].character.name === "chamira") {
+                let temp = self.players[0];
+                self.players[0] = self.players[j];
+                self.players[j] = temp;
+                break;
+            }
+        }
     }
 
     _sortAndInitCards (cards) {
@@ -93,6 +104,7 @@ class Game {
         self.bank = new Deck();
         self.armory = new Deck();
         self.market = new Deck();
+        self.marketSelection = [];
         self.marketDiscard = new Deck();
         self.starzone = new Deck();
 
