@@ -1,4 +1,6 @@
-import Head from 'next/head'
+import { useCallback, useState, useEffect } from 'react'
+import { debounce } from 'debounce'
+import { TextField } from '@material-ui/core'
 import styles from './game.module.scss'
 
 const verifiedCode = 'dQbOxX0ZZEKDnA4LRUJoKQ=='
@@ -18,19 +20,29 @@ export async function getServerSideProps(context) {
 }
 
 export default function Game() {
+  const [username, setUsername] = useState('')
+
+  useEffect(() => {
+    const name = window.localStorage.getItem('empire:username')
+    setUsername(name)
+  }, [])
+
+  const persistUsername = useCallback(debounce((e) => {
+    window.localStorage.setItem('empire:username', e.target.value)
+  }, 200), [])
+
+  const onUsernameChange = useCallback((e) => {
+    setUsername(e.target.value)
+    persistUsername(e)
+  }, [])
+
   return (
     <div className={styles.container}>
-      <Head>
-        <title>Empire</title>
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
-        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet"></link>
-      </Head>
-
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to a Game
-        </h1>
+        <div>
+          <h2>Enter a username</h2>
+          <TextField value={username} onChange={onUsernameChange} label="username" fullWidth />
+        </div>
       </main>
     </div>
   )
