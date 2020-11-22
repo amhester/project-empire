@@ -1,65 +1,60 @@
 import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { useState, useCallback } from 'react'
+import { TextField, Button } from '@material-ui/core'
+import { withStyles } from '@material-ui/core/styles'
+import styles from './index.module.scss'
+
+const CustomTextField = withStyles({
+  root: {
+    marginBottom: '1rem',
+    '& label': {
+      fontSize: '2rem'
+    },
+    '& label.Mui-focused': {
+      fontSize: '1rem',
+    },
+    '& input': {
+      fontSize: '2rem !important'
+    }
+  }
+})(TextField)
+
+const codeVerificationURL = '/api/verify_code'
 
 export default function Home() {
+  const [code, setCode] = useState('')
+
+  const onCodeChange = useCallback((e) => {
+    setCode(e.target.value)
+  }, [])
+
+  const onCodeEnter = useCallback(() => {
+    fetch(`${codeVerificationURL}?code=${code}`).then((res) => {
+      if (res.status === 200) {
+        console.log('we cool')
+      }
+    })
+  }, [code])
+
   return (
     <div className={styles.container}>
       <Head>
-        <title>Create Next App</title>
+        <title>Empire</title>
         <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.gstatic.com"></link>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Raleway:wght@300;400;700&display=swap" rel="stylesheet"></link>
       </Head>
 
       <main className={styles.main}>
         <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
+          Welcome to Elements of the Empire
         </h1>
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className={styles.enterCode}>
+          <CustomTextField label="Enter Beta Code" value={code} onChange={onCodeChange} fullWidth />
+          <Button variant="contained" color="primary" onClick={onCodeEnter} size="large">Enter</Button>
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
     </div>
   )
 }
