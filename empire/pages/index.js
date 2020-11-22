@@ -1,4 +1,5 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 import { useState, useCallback } from 'react'
 import { TextField, Button } from '@material-ui/core'
 import { withStyles } from '@material-ui/core/styles'
@@ -11,7 +12,10 @@ const CustomTextField = withStyles({
       fontSize: '2rem'
     },
     '& label.Mui-focused': {
-      fontSize: '1rem',
+      fontSize: '1rem'
+    },
+    '& .MuiInputLabel-shrink': {
+      fontSize: '1rem'
     },
     '& input': {
       fontSize: '2rem !important'
@@ -19,21 +23,23 @@ const CustomTextField = withStyles({
   }
 })(TextField)
 
-const codeVerificationURL = '/api/verify_code'
-
 export default function Home() {
+  const router = useRouter()
+
   const [code, setCode] = useState('')
 
   const onCodeChange = useCallback((e) => {
     setCode(e.target.value)
   }, [])
 
+  const onEnterPress = useCallback((e) => {
+    if (e.key === 'Enter') {
+      router.push(`/game?code=${code}`)
+    }
+  }, [code])
+
   const onCodeEnter = useCallback(() => {
-    fetch(`${codeVerificationURL}?code=${code}`).then((res) => {
-      if (res.status === 200) {
-        console.log('we cool')
-      }
-    })
+    router.push(`/game?code=${code}`)
   }, [code])
 
   return (
@@ -51,7 +57,7 @@ export default function Home() {
         </h1>
 
         <div className={styles.enterCode}>
-          <CustomTextField label="Enter Beta Code" value={code} onChange={onCodeChange} fullWidth />
+          <CustomTextField label="Enter Beta Code" value={code} onChange={onCodeChange} fullWidth inputProps={{ onKeyPress: onEnterPress }} />
           <Button variant="contained" color="primary" onClick={onCodeEnter} size="large">Enter</Button>
         </div>
       </main>
